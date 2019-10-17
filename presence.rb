@@ -27,10 +27,7 @@ module Presence
   }
 
   def self.fetch_file_ids
-
-    params = FILE_REQUEST_PARAMS.dup
-
-    path = '/cloud/json/filesByCount/4?' + hash_to_params(params)
+    path = '/cloud/json/filesByCount/4?' + hash_to_params(FILE_REQUEST_PARAMS)
 
     resp = fetch_response(PRESENCE_HOST,PRESENCE_PORT,path)
     resp = JSON.parse( resp.body )
@@ -38,13 +35,11 @@ module Presence
     return [] unless resp['files']
 
     resp['files'].map{|f| 
-      
       {
         'id' => f['id'],
         'device' => f['device']['desc'],
         'name' => f['name'],
         'date' => f['creationDate']
-
       }
     }
   end
