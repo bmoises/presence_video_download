@@ -14,18 +14,16 @@ Dotenv.load
 
 module Presence
 
-  PRESENCE_HOST = 'app.presencepro.com'
-  PRESENCE_PORT = 443
-  DEBUG = true
+  PRESENCE_HOST        = 'app.presencepro.com'
+  PRESENCE_PORT        = 443
+  DEBUG                = true
+  DATA_DIR             = ENV['DATA_DIR']
+  API_KEY              = ENV['API_KEY']
 
-  DATA_DIR = 'videos'
-
-  API_KEY = ENV["API_KEY"]
-
-  FILE_REQUEST_PARAMS = {
-    'sortBy' => 'creationTime',
+  FILE_REQUEST_PARAMS  = {
+    'sortBy'         => 'creationTime',
     'sortCollection' => 'files',
-    'sortOrder' => 'desc'
+    'sortOrder'      => 'desc'
   }
 
   def self.fetch_file_ids
@@ -57,7 +55,7 @@ module Presence
 
   # Download file
   def self.download_file(id)
-    path = "/cloud/json/files/#{id}?" + hash_to_params(params)
+    path = "/cloud/json/files/#{id}?"
     resp = fetch_response(PRESENCE_HOST,PRESENCE_PORT,path)
 
     resp
